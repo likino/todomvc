@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue.js·TodoMVC</title>
+	<link rel="stylesheet" href="main.css">
+	<script type="text/javascript" src="https://npmcdn.com/vue@1.0.26/dist/vue.min.js"></script>
+</head>
+<body>
+	<h2>todos</h2>
+	<div id="app">
+		<input v-model="newTodo" @keyup.enter="addTodo" placeholder="What needs to be done?">
+		<ul>
+			<li v-for="todo in todos" :class="{completed: todo.completed}">
+				<input type="checkbox" class="toggle" v-model="todo.completed">
+				<label>{{todo.text}}</label>
+				<button v-on:click="removeTodo($index)">X</button>
+			</li>
+		</ul>
+		<footer>
+			
+		</footer>
+	</div>
+
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				newTodo: '',
+				todos: []
+			},
+			methods: {
+				addTodo: function(){
+					var text = this.newTodo.trim();
+					if(text){
+						this.todos.push({text: text});
+						this.newTodo = '';
+					}
+				},
+				removeTodo: function(index){
+					this.todos.splice(index, 1);
+				}
+			}
+		})
+	</script>
+</body>
+</html>
