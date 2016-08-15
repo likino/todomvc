@@ -7,27 +7,41 @@
 	<script type="text/javascript" src="https://npmcdn.com/vue@1.0.26/dist/vue.min.js"></script>
 </head>
 <body>
-	<h2>todos</h2>
-	<div id="app">
-		<input v-model="newTodo" @keyup.enter="addTodo" placeholder="What needs to be done?">
-		<ul>
-			<li v-for="todo in todos" :class="{completed: todo.completed}">
-				<input type="checkbox" class="toggle" v-model="todo.completed">
-				<label>{{todo.text}}</label>
-				<button v-on:click="removeTodo($index)">X</button>
-			</li>
-		</ul>
+	<section id="app">
+		<header>
+			<h1>todos</h1>
+		</header>
+		<section>
+			<input v-model="newTodo" @keyup.enter="addTodo" placeholder="What needs to be done?">
+			<ul>
+				<li v-for="todo in todos" :class="{completed: todo.completed}">
+					<input type="checkbox" class="toggle" v-model="todo.completed">
+					<label>{{todo.text}}</label>
+					<button v-on:click="removeTodo($index)">X</button>
+				</li>
+			</ul>
+		</section>
 		<footer>
-			
+			<span><strong v-text="active"></strong> item left</span>
+			<ul>
+				<li><a href="#">All</a></li>
+				<li><a href="#">Active</a></li>
+				<li><a href="#">Completed</a></li>
+			</ul>
+			<button @click="clearTodo">Clear completed</button>
 		</footer>
-	</div>
-
+	</section>
 	<script>
 		new Vue({
 			el: '#app',
 			data: {
 				newTodo: '',
 				todos: []
+			},
+			computed: {
+				active: function(){
+					return this.todos.length;
+				}
 			},
 			methods: {
 				addTodo: function(){
