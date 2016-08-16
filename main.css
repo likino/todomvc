@@ -24,3 +24,18 @@ footer ul{
 footer ul li{
 	flex: 1;
 }
+input.newtodo {
+    width: 100%;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 5px;
+}
+li.todo{
+	margin:10px 0;
+}
+li.todo .toggle{
+	width:40px;
+}
+li.todo button{
+	float: right;
+}
